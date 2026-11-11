@@ -99,3 +99,15 @@ If `$_SESSION['no-cache']` is set to a bundle name, invalidation is skipped for 
 ## Clear all caches
 
 To flush the entire Laravel cache, visit `/admin/flush-laravel-cache` or call `DrupalLaravelCacheController::clearAll()` programmatically.
+## Default includes for the API gateway
+
+`GET /{locale}/gateway/includes` returns the `default_include` of every enabled JSON:API Extras resource, keyed by its resource path:
+
+```json
+{
+    "stories": ["header_image.image.image", "components", "related_stories"],
+    "pages": ["parent_menu_item", "header_image.image.image", "components"]
+}
+```
+
+The API gateway (`in10/api-gateway-drupal` 2.5+) uses this list to check the `?include=` a frontend asks for. It is public: it only shows include paths, which the JSON:API responses show anyway. The response is cached and cleared when a resource config changes.
