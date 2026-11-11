@@ -5,3 +5,11 @@ drupalLaravelCache.clearall:
     _title: 'Cache cleared'
   requirements:
     _permission: 'access content'
+
+drupalLaravelCache.includes:
+  path: '/gateway/includes'
+  defaults:
+    _controller: '\Drupal\drupal_laravel_cache\Controller\GatewayIncludesController::list'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
